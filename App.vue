@@ -5,6 +5,14 @@
       <text>{{ now['weather'] }}</text>
       <text>{{ now['temp'] }}</text>
     </view>
+    <scroll-view class="future-weather-container">
+      <view class="future-day" v-for="(day, key, index) in forecast" :key="key">
+        <text> {{ key }} </text>
+        <text> {{ day['weather'] }} </text>
+        <text> {{ day['temp-high'] }} </text>
+        <text> {{ day['temp-low'] }} </text>
+      </view>
+    </scroll-view>
   </view>
 </template>
  <script>
@@ -49,13 +57,19 @@
  }
  </script>
 <style>
-.container {
-  background-color: white;
+.app {
+  background-color: lightskyblue;
+}
+.now-container {
   align-items: center;
   justify-content: center;
-  flex: 1;
+  padding: 50;
 }
-.text-color-primary {
-  color: blue;
+.future-weather-container {
+  height: 100;
+}
+.future-day {
+  flex: 1;
+  flex-direction: row;
 }
 </style>
