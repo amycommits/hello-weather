@@ -1,9 +1,24 @@
 <template>
   <view class="container">
-    <text class="text-color-primary">My Vue Native App</text>
+    <text>{{ location }}</text>
+    <text>{{ now['weather'] }}</text>
+    <text>{{ now['temp'] }}</text>
   </view>
 </template>
- 
+ <script>
+ export default {
+   name: 'app-entry',
+   data() {
+     return {
+       location: 'Washington, DC',
+       now: {
+         temp: 97,
+         weather: 'cloudy'
+       }
+     }
+   }
+ }
+ </script>
 <style>
 .container {
   background-color: white;
