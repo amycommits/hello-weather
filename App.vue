@@ -3,7 +3,12 @@
     <view class="now-container">
       <text>{{ location }}</text>
       <text>{{ now['weather'] }}</text>
-      <text>{{ now['temp'] }}</text>
+      <view class="current-temp">
+        <text>{{ now['temp'] }}</text>
+        <image
+          class="degree-icon"
+          :source="require('./assets/degree_icon.jpg')" />
+      </view>
     </view>
     <scroll-view class="future-weather-container">
       <view class="future-day" v-for="(day, key, index) in forecast" :key="key">
@@ -71,5 +76,14 @@
 .future-day {
   flex: 1;
   flex-direction: row;
+}
+.current-temp {
+  align-items: flex-start;
+  flex: 1;
+  flex-direction: row;
+}
+.degree-icon {
+  width: 10;
+  height:10;
 }
 </style>
