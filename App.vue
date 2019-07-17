@@ -10,10 +10,25 @@
           :source="require('./assets/degree_icon.jpg')" />
       </view>
     </view>
+    <scroll-view horizontal class="hourly-weather-container">
+      <view class="this-hour" 
+        v-for="(hour, key, index) in hourly"
+        :key="key">
+        <text> {{ key }} </text>
+        <Ionicons
+          :name="getWeatherIcon(hour.weather)"
+          class="weather-icon"
+        />
+        <text> {{ hour.temp }} </text>
+      </view>
+    </scroll-view>
     <scroll-view class="future-weather-container">
       <view class="future-day" v-for="(day, key, index) in forecast" :key="key">
         <text> {{ key }} </text>
-        <Ionicons name="md-cloud-outline" class="weather-icon" />
+        <Ionicons
+          :name="getWeatherIcon(day.weather)"
+          class="weather-icon"
+        />
         <text> {{ day['temp-high'] }} </text>
         <text> {{ day['temp-low'] }} </text>
       </view>
@@ -59,6 +74,24 @@
            'temp-low': 83,
            'weather': 'cloudy'
          }
+       },
+       hourly: {
+         '20': {
+           temp: 95,
+           weather: 'cloudy'
+         },
+         '21': {
+           temp: 93,
+           weather: 'sunny'
+         },
+         '22': {
+           temp: 85,
+           weather: 'thunderstorm'
+         },
+         '23': {
+           temp: 87,
+           weather: 'partly-cloudy'
+         }
        }
      }
    },
@@ -68,6 +101,18 @@
          case 'cloudy':
            return "md-cloud-outline"
            break;
+          case 'thunderstorm':
+            return "md-thunderstorm"
+            break;
+          case 'rainy':
+            return "md-rainy"
+            break;
+          case 'partly-cloudy':
+            return 'md-partly-sunny'
+            break;
+          case 'sunny':
+            return "md-sunny"
+            break;
          default:
            return "md-infinite"
            break;
@@ -102,6 +147,14 @@
   height:10;
 }
 .weather-icon {
-  font-size: 200px;
+  font-size: 25px;
+}
+.hourly-weather-container {
+  height: 100;
+}
+.this-hour {
+  flex: 1;
+  flex-direction: column;
+  padding-left: 150;
 }
 </style>
