@@ -13,7 +13,7 @@
     <scroll-view class="future-weather-container">
       <view class="future-day" v-for="(day, key, index) in forecast" :key="key">
         <text> {{ key }} </text>
-        <text> {{ day['weather'] }} </text>
+        <Ionicons name="md-cloud-outline" class="weather-icon" />
         <text> {{ day['temp-high'] }} </text>
         <text> {{ day['temp-low'] }} </text>
       </view>
@@ -21,8 +21,11 @@
   </view>
 </template>
  <script>
+ import { Ionicons } from "@expo/vector-icons";
+
  export default {
    name: 'app-entry',
+   components: { Ionicons },
    data() {
      return {
        location: 'Washington, DC',
@@ -58,6 +61,18 @@
          }
        }
      }
+   },
+   methods: {
+     getWeatherIcon(name) {
+       switch(name) {
+         case 'cloudy':
+           return "md-cloud-outline"
+           break;
+         default:
+           return "md-infinite"
+           break;
+       }
+     }
    }
  }
  </script>
@@ -85,5 +100,8 @@
 .degree-icon {
   width: 10;
   height:10;
+}
+.weather-icon {
+  font-size: 200px;
 }
 </style>
