@@ -33,6 +33,17 @@
         <text> {{ day['temp-low'] }} </text>
       </view>
     </scroll-view>
+    <view class="user-options">
+      <textInput
+        v-if="isClicked"
+        class="weather-input"
+        v-model="now.weather"
+      />
+      <button
+        :on-press="handleClick"
+        :title="isClicked ? '-' : '+'"
+      />
+    </view>
   </view>
 </template>
  <script>
@@ -43,6 +54,7 @@
    components: { Ionicons },
    data() {
      return {
+       isClicked: false,
        location: 'Washington, DC',
        now: {
          temp: 97,
@@ -96,6 +108,9 @@
      }
    },
    methods: {
+     handleClick () {
+       this.isClicked = !this.isClicked
+     },
      getWeatherIcon(name) {
        switch(name) {
          case 'cloudy':
@@ -156,5 +171,8 @@
   flex: 1;
   flex-direction: column;
   padding-left: 150;
+}
+.weather-input {
+  background-color: lightgray;
 }
 </style>
