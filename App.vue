@@ -1,10 +1,10 @@
 <template>
   <view class="app">
     <view class="now-container">
-      <text>{{ location }}</text>
-      <text>{{ now['weather'] }}</text>
+      <text>{{ weather.location }}</text>
+      <text>{{ weather.now['weather'] }}</text>
       <view class="current-temp">
-        <text>{{ now['temp'] }}</text>
+        <text>{{ weather.now['temp'] }}</text>
         <image
           class="degree-icon"
           :source="require('./assets/degree_icon.jpg')" />
@@ -12,7 +12,7 @@
     </view>
     <scroll-view horizontal class="hourly-weather-container">
       <view class="this-hour" 
-        v-for="(hour, key, index) in hourly"
+        v-for="(hour, key, index) in weather.hourly"
         :key="key">
         <text> {{ key }} </text>
         <Ionicons
@@ -23,7 +23,7 @@
       </view>
     </scroll-view>
     <scroll-view class="future-weather-container">
-      <view class="future-day" v-for="(day, key, index) in forecast" :key="key">
+      <view class="future-day" v-for="(day, key, index) in weather.forecast" :key="key">
         <text> {{ key }} </text>
         <Ionicons
           :name="getWeatherIcon(day.weather)"
@@ -48,63 +48,14 @@
 </template>
  <script>
  import { Ionicons } from "@expo/vector-icons";
-
+ import json from './data/weather.json'
  export default {
    name: 'app-entry',
    components: { Ionicons },
    data() {
      return {
        isClicked: false,
-       location: 'Washington, DC',
-       now: {
-         temp: 97,
-         weather: 'cloudy'
-       },
-       forecast: {
-         '2019-07-25': {
-           'temp-high': 96,
-           'temp-low': 85,
-           'weather': 'rainy'
-         },
-         '2019-07-26': {
-           'temp-high': 98,
-           'temp-low': 88,
-           'weather': 'rainy'
-         },
-         '2019-07-27': {
-           'temp-high': 92,
-           'temp-low': 72,
-           'weather': 'sunny'
-         },
-         '2019-07-28': {
-           'temp-high': 87,
-           'temp-low': 77,
-           'weather': 'cloudy'
-         },
-         '2019-07-29': {
-           'temp-high': 95,
-           'temp-low': 83,
-           'weather': 'cloudy'
-         }
-       },
-       hourly: {
-         '20': {
-           temp: 95,
-           weather: 'cloudy'
-         },
-         '21': {
-           temp: 93,
-           weather: 'sunny'
-         },
-         '22': {
-           temp: 85,
-           weather: 'thunderstorm'
-         },
-         '23': {
-           temp: 87,
-           weather: 'partly-cloudy'
-         }
-       }
+       weather: json
      }
    },
    methods: {
