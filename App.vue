@@ -42,7 +42,7 @@
      }
    },
    mounted: function () {
-     const apiKey = 'b6907d289e10d714a6e88b30761fae22' //your api key
+     const apiKey = '' //your api key
        const weatherLink = `https://samples.openweathermap.org/data/2.5/weather?zip=94040,us&appid=${apiKey}`
      
        fetch(weatherLink)
